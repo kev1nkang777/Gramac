@@ -115,8 +115,6 @@ def Predict(X,clf,classification):
             model = joblib.load('./detection_model/'+clf+'_model.joblib')
             result = model.predict_proba(X)
     else:
-        fake = np.ones(7)
-        X = np.vstack([X,fake])
         X = torch.tensor(X.astype(np.float32))
         if classification:
             model = MLP(num_features=X.size(1), hidden_channels=64, num_classes=9).to('cpu')
